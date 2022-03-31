@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      function handleClose() {
+        //팝업의 윈도우
+        var commentInput = window.document.getElementById("comment");
+        var comment = commentInput.value;
+        //window.opener가 window html이 됨으로 comment는 window의 값을 참조한다
+        var commentDiv = window.opener.document.getElementById("comment");
+        commentDiv.innerHTML = comment;
+        window.close();
+      }
+    </script>
+  </head>
+  <body>
+    <div class="card">
+      <div class="card-header">Popup</div>
+
+      <div class="card-body">
+        <img src="/images/photo5.jpg" width="300px" height="300px" />
+        <hr />
+        Comment: <input type="text" id="comment" />
+        <hr />
+        <button onclick="handleClose()" class="btn btn-info btn-sm">닫기</button>
+      </div>
+    </div>
+  </body>
+</html>

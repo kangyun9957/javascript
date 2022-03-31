@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+    <div class="card">
+        <div class="card-header">
+            String Method
+        </div>
+
+        <div class="card-body">
+            <form action="http://tomcat.apache.rog" onsubmit="checkFormData()">
+                <div class="form-group">
+                    <label for="ssn">주민등록번호</label>
+                    <input type="text" class="form-control" id="ssn">
+                    <small id="ssnHelp" class="form-text text-muted">13자를 - 없이 입력하세요</small>
+                </div>
+                <button type="submit" class="btn btn-primary">가입</button>
+            </form>
+        </div>
+        <script>
+            function checkFormData(){
+                event.preventDefault();
+                let ssnInput=document.getElementById("ssn");
+                let ssn=ssnInput.value;
+                //문자하나 가져오기
+                let sex=ssn.charAt(7);
+                if(sex===1 || sex===3){
+                    console.log("남자");
+                }else{
+                    console.log("여자");
+                }
+                //분리하기
+                const arr=ssn.split("-");
+                console.log(arr);
+
+                //잘라내기
+                let ssnFirst1=ssn.substr(0,6);
+                let ssnFirst2=ssn.substring(0,7);
+            }
+        </script>
+    </div>
+    
+</body>
+</html>

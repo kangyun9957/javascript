@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+    <title>Document</title>
+    <script>
+      function showTime() {
+        //1초간격 실행,var안붙히면 전역변수
+        taskId = window.setInterval(function () {
+          const target = document.getElementById("btn1");
+          target.disabled = true;
+          const now = new Date();
+          var commentInput = now.toLocaleTimeString();
+          if (commentInput.substr(0, 2) === "오후") {
+            commentInput = commentInput.replace("오후", "PM");
+          } else {
+            commentInput = commentInput.replace("오전", "AM");
+          }
+          var commentInput2 = window.document.getElementById("comment");
+          commentInput2.innerHTML = commentInput;
+        }, 1000);
+      }
+      function showTime2() {
+        //1초간격 실행,var안붙히면 전역변수
+        let starttime = Date.now();
+        const target = document.getElementById("btn3");
+        target.disabled = true;
+        console.log(starttime); //1970년도 1월1일0시 부터 현재까지의 밀리세컨드
+        taskId2 = window.setInterval(function () {
+          let endtime = Date.now();
+          let result = endtime - starttime;
+          window.document.getElementById("comment2").innerHTML = cal(result);
+        }, 10);
+      }
+      function stopIntervalRun() {
+        const target = document.getElementById("btn2");
+        target.disabled = true;
+        window.clearInterval(taskId);
+      }
+      function stopIntervalRun2() {
+        const target = document.getElementById("btn4");
+        target.disabled = true;
+        window.clearInterval(taskId2);
+      }
+      function startTimeoutRun() {
+        taskId2 = window.setTimeout(function () {
+          console.log("running....");
+        }, 1000);
+      }
+      function stopTimeoutRun() {
+        window.clearTimeout(taskId2);
+      }
+      function cal(mil) {
+        let res;
+        let hour = parseInt(mil / 1000 / 3600);
+        mil %= 1000 * 3600;
+        let minute = parseInt(mil / 1000 / 60);
+        mil %= 1000 * 60;
+        let second = parseInt(mil / 1000);
+        mil %= 1000;
+        if( second >= 60){
+            second = second % 60;
+        } else if(second < 10){
+            second = `0${second}`;
+        }
+
+       if(minute < 10){
+            minute = `0${minute}`;
+        }
+
+        if(hour < 10){
+            hour = `0${hour}`;
+        }
+        res = hour + ":" + minute + ":" + second + ":" + mil;
+        return res;
+      }
+    </script>
+    <style>
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+      @keyframes AnimationName {
+        0% {
+          background-position: 0% 25%;
+        }
+        25% {
+          background-position: 50% 25%;
+        }
+        50% {
+          background-position: 75% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+
+      #a {
+        color: #fff;
+        background: linear-gradient(-45deg, #696969, #000000, #696969, #000000);
+        background-size: 400% 400%;
+        animation: AnimationName 5s ease infinite;
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        top: 35%;
+        text-align: center;
+      }
+      #a1 {
+        color: #fff;
+        background: linear-gradient(-45deg, #696969, #000000, #696969, #000000);
+        background-size: 400% 400%;
+        animation: AnimationName 5s ease infinite;
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        top: 35%;
+        text-align: center;
+      }
+      #a3 {
+        background-color: #000000;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="a3" class="card">
+      <div style="color: #fff; font-size: 30px;" class="card-header">Digital Clock</div>
+      <div class="card-body">
+        <div id="a" style="height: 300px; color: white; font-size: 150px" class="border-secondary rounded-pill text-center">
+          <span id="comment" class="align-middle"></span>
+        </div>
+        <hr />
+
+        <div class="mt-10">
+          <button id="btn1" onclick="showTime()" class="btn btn-dark mb-4">시작</button>
+          <button id="btn2" onclick="stopIntervalRun()" class="btn btn-dark mb-4">중지</button>
+        </div>
+      </div>
+      <div style="color: #fff;  font-size: 30px;"class="card-header">Stopwatch</div>
+      <div class="card-body">
+        <div id="a1" style="height: 300px; color: white; font-size: 150px" class="border-secondary rounded-pill text-center">
+          <span id="comment2" class="align-middle"></span>
+        </div>
+        <hr />
+
+        <div class="mt-10">
+          <button id="btn3" onclick="showTime2()" class="btn btn-dark mb-4">시작</button>
+          <button id="btn4" onclick="stopIntervalRun2()" class="btn btn-dark mb-4">중지</button>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

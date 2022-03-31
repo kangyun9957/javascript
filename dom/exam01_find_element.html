@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- 부트스트랩 기본설정
+    <style>
+        *{
+            padding: 0px;
+            margin: 0px;
+        }
+    </style> -->
+    <script>
+        function findElementById(){
+            //let p1=window.document.getElementById("p1");
+            let p1=window.document.querySelector("#p1");
+            p1.innerHTML='<img src="/images/photo1.jpg" width="50" height="50"/>';
+        }
+        function findElementByClass(){
+           
+        }
+    </script>
+</head>
+<body>
+    <div class="card">
+        <div class="card-header">
+            Document - find element
+        </div>
+
+        <div class="card-body">
+            <button onclick="findElementById()" class="btn btn-info btn-sm">ID로 찾기</button>
+            <button 
+            <hr/>
+            <!-- flex박스 이용 사이즈 지정은 부트스트랩에 없음 -->
+            <div class="d-flex">
+                <p id="p1" class="border bg-success" style="width: 100px;height: 100px;"></p>
+                <!-- class1은 class찾고자할때 쓰려고 선언 -->
+                <p class="class1 border bg-danger" style="width: 100px;height: 100px;"></p>
+                <p class="class1 border bg-info" style="width: 100px;height: 100px;"></p>
+            </div>
+        </div>
+    </div>
+    
+</body>
+</html>

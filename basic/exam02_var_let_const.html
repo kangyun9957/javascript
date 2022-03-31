@@ -1,0 +1,59 @@
+!
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      //전역변수
+      var var1;
+      let var2;
+      const var3 = 3; //값 변경 불가
+      var4 = 4;
+      //전역변수 사용
+      var1 = 10;
+      var2 = 20;
+
+      var4 = 40;
+      console.log("var1" + var1);
+      console.log("var2" + var2);
+      console.log("var3" + var3);
+      console.log("var4" + var4);
+      //함수
+      function fun1() {
+        if (true) {
+          //로컬 변수 let은 선언 블록내에서만 가능, var는 fun1까지는 가능
+          var var5 = 5; //함수 변수
+          let var6 = 6; // 로컬 변수
+          var7 = 7; // 전역 변수
+          console.log(" ");
+          console.log("var1" + var1);
+          console.log("var2" + var2);
+          console.log("var3" + var3);
+          console.log("var4" + var4);
+          console.log("var5" + var5);
+          console.log("var6" + var6);
+          console.log("var7" + var7);
+        }
+        console.log(" ");
+        console.log("var1" + var1);
+        console.log("var2" + var2);
+        console.log("var3" + var3);
+        console.log("var4" + var4);
+      }
+      fun1();
+    </script>
+  </head>
+
+  <body>
+    <div class="card">
+      <div class="card-header">Variables(변수)</div>
+
+      <div class="card-body"></div>
+    </div>
+  </body>
+</html>
