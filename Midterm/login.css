@@ -1,0 +1,54 @@
+.login-container {
+  min-height: 100vh;
+}
+.login-img-wrapper {
+  margin: 40px 40px;
+  height: 170px;
+  width: 500px;
+}
+.login-mainimg {
+  height: 100%;
+  width: 100%;
+}
+.login-form {
+  margin-bottom: 50px;
+}
+.form-control {
+  height: calc(1.5em + 2em + 2px);
+}
+.btn {
+  background-color: rgba(242, 101, 34);
+  color: white;
+  width: 100%;
+  height: 50px;
+  font-size: 1.5rem;
+}
+.login-find {
+  text-align: center;
+  margin: 20px;
+  margin: 20px;
+}
+#id-find:visited {
+  color: black;
+  text-decoration: none;
+}
+#id-find:link {
+  color: gray;
+  text-decoration: none;
+}
+#id-find:hover {
+  color: rgba(242, 101, 34);
+  text-decoration: underline;
+}
+#password-find:visited {
+  color: black;
+  text-decoration: none;
+}
+#password-find:link {
+  color: gray;
+  text-decoration: none;
+}
+#password-find:hover {
+  color: rgba(242, 101, 34);
+  text-decoration: underline;
+}

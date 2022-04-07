@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
+    
+    <style>
+      #navtop{
+        background: linear-gradient(-45deg, #f09a55fb, #f09a55fb, #f09a55fb);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container-fluid p-0">
+      <nav id="navtop" class="navbar navbar-dark sticky-top bg-dark shadow rounded">
+        <div>
+          <button id="categorybar" onclick="expand()"  class="btn navbar-toggler-icon ml-1" data-toggle="collapse" data-target="#sideMenu" aria-controls="sideMenu" aria-expanded="false"></button>
+          <a class="navbar-brand d-inline mr-0 px-3" href="#">Osstem</a>
+        </div>
+        <ul class="navbar-nav px-3">
+          <li class="nav-item text-nowrap">
+            <a class="nav-link" href="#">Sign out</a>
+          </li>
+        </ul>
+      </nav>
+   
+      <div class="row m-0" style="width: 100%;">
+        <nav id="sideMenu" class="col-md-3 col-lg-2  sidebar collapse collapse-horizontal bg-danger">
+          <div id="category" class="sidebar-sticky pt-3">
+            <ul class="nav flex-column">
+              <li class="nav-item">
+                <button type="button" class="btn" data-toggle="collapse" data-target="#list1">
+                  <span data-feather="file"></span>
+                  일정관리
+                </button>
+                
+              </li>
+              <li class="nav-item">
+                <button type="button" class="btn" data-toggle="collapse" data-target="#list2">
+                  <span data-feather="file"></span>
+                  스케줄표
+                </button>
+                <div id="list2" class="collapse">
+                  <a class="dropdown-item" href="#">-AS 스케줄</a>
+                  <a class="dropdown-item" href="#">-상담 스케줄</a>
+                  <a class="dropdown-item" href="#">-시공 스케줄</a>
+                </div>
+              </li>
+              <li class="nav-item">
+                <button type="button" class="btn" data-toggle="collapse" data-target="#list3">
+                  <span data-feather="file"></span>
+                  계약 병원 정보
+                </button>
+                <div id="list3" class="collapse">
+                  <a class="dropdown-item" href="#">Link 1</a>
+                  <a class="dropdown-item" href="#">Link 2</a>
+                  <a class="dropdown-item" href="#">Link 3</a>
+                </div>
+              </li>
+              <li class="nav-item">
+                <button type="button" class="btn" data-toggle="collapse" data-target="#list4">
+                  <span data-feather="file"></span>
+                  통계
+                </button>
+                <div id="list4" class="collapse">
+                  <a class="dropdown-item" href="#">매출</a>
+                  <a class="dropdown-item" href="#">디자인</a>
+                  <a class="dropdown-item" href="#">계약</a>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      
+        <div id="mainMenu" class="col-md-6 col-lg-7" style="width: 100%">
+          <div class="d-flex flex-column">
+            <div class="d-flex flex-row border-bottom mb-4 pb-4 pt-4 justify-content-center">
+              <div class="mr-2" style="width: 300px;">
+                <div class="card" style="height: 50%">이번달 매출</div>
+                <div class="card" style="height: 50%">이번달 계약 건수</div>
+              </div>
+              <div  class="card" style="width: 300px; height: 300px">
+                <!--차트가 그려질 부분-->
+                <canvas id="myChart"></canvas>
+              </div>
+              <div  class="card" style="width: 300px; height: 300px">
+                <!--차트가 그려질 부분-->
+                <canvas id="myChart2"></canvas>
+              </div>
+              
+            </div>
+            <div  class="card mb-4 pb-4 pt-4" style="min-width: 100%; height: 300px">
+              <!--차트가 그려질 부분-->
+              <canvas id="myChart3"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <div id="sideMenu2" class="col-md-2 col-lg-5 d-flex flex-column" style="height: 300px; width: 100%">
+          <div class="text-center card mt-3">
+            <table class="table table-dashboard mb-0 table-borderless fs--1 border-200">
+              <thead class="bg-light">알림</thead>
+              <tbody>
+                <tr class="border-bottom border-200">
+                  <td class="align-middle text-end fw-semi-bold">1.</td>
+                  <td class="align-middle text-end fw-semi-bold">을지병원</td>
+                  <td class="align-middle text-end fw-semi-bold">04/03</td>
+                </tr>
+                <tr class="border-bottom border-200">
+                  <td class="align-middle text-end fw-semi-bold">2.</td>
+                  <td class="align-middle text-end fw-semi-bold">을지병원</td>
+                  <td class="align-middle text-end fw-semi-bold">04/03</td>
+                </tr>
+                <tr class="border-bottom border-200">
+                  <td class="align-middle text-end fw-semi-bold">1.</td>
+                  <td class="align-middle text-end fw-semi-bold">을지병원</td>
+                  <td class="align-middle text-end fw-semi-bold">04/03</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <hr />
+          <h4 class="text-center text-900">데일리 스케줄</h2>
+          <div class="card">
+            <table class="table table-dashboard mb-0 table-borderless fs--1 border-200">
+              <thead class="bg-light">
+                <tr class="text-900">
+                  <th>As 스케줄</th>
+                  <th class="text-end">병원명/분류</th>
+                  <th class="pe-card text-end" style="width: 8rem">날짜</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="border-bottom border-200">
+                  <td class="align-middle text-end fw-semi-bold">1.</td>
+                  <td class="align-middle text-end fw-semi-bold">을지병원</td>
+                  <td class="align-middle text-end fw-semi-bold">04/03</td>
+                </tr>
+                <tr class="border-bottom border-200">
+                  <td class="align-middle text-end fw-semi-bold">2.</td>
+                  <td class="align-middle text-end fw-semi-bold">을지병원</td>
+                  <td class="align-middle text-end fw-semi-bold">04/03</td>
+                </tr>
+                <tr class="border-bottom border-200">
+                  <td class="align-middle text-end fw-semi-bold">1.</td>
+                  <td class="align-middle text-end fw-semi-bold">을지병원</td>
+                  <td class="align-middle text-end fw-semi-bold">04/03</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="card">
+            <table class="table table-dashboard mb-0 table-borderless fs--1 border-200">
+              <thead class="bg-light">
+                <tr class="text-900">
+                  <th>시공 스케줄</th>
+                  <th class="text-end">병원명/분류</th>
+                  <th class="pe-card text-end" style="width: 8rem">날짜</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="border-bottom border-200">
+                  <td class="align-middle text-end fw-semi-bold">1.</td>
+                  <td class="align-middle text-end fw-semi-bold">을지병원</td>
+                  <td class="align-middle text-end fw-semi-bold">04/03</td>
+                </tr>
+                <tr class="border-bottom border-200">
+                  <td class="align-middle text-end fw-semi-bold">2.</td>
+                  <td class="align-middle text-end fw-semi-bold">을지병원</td>
+                  <td class="align-middle text-end fw-semi-bold">04/03</td>
+                </tr>
+                <tr class="border-bottom border-200">
+                  <td class="align-middle text-end fw-semi-bold">1.</td>
+                  <td class="align-middle text-end fw-semi-bold">을지병원</td>
+                  <td class="align-middle text-end fw-semi-bold">04/03</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="card">
+            <table class="table table-dashboard mb-0 table-borderless fs--1 border-200">
+              <thead class="bg-light">
+                <tr class="text-900">
+                  <th>상담 스케줄</th>
+                  <th class="text-end">병원명/분류</th>
+                  <th class="pe-card text-end" style="width: 8rem">날짜</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="border-bottom border-200">
+                  <td class="align-middle text-end fw-semi-bold">1.</td>
+                  <td class="align-middle text-end fw-semi-bold">을지병원</td>
+                  <td class="align-middle text-end fw-semi-bold">04/03</td>
+                </tr>
+                <tr class="border-bottom border-200">
+                  <td class="align-middle text-end fw-semi-bold">2.</td>
+                  <td class="align-middle text-end fw-semi-bold">을지병원</td>
+                  <td class="align-middle text-end fw-semi-bold">04/03</td>
+                </tr>
+                <tr class="border-bottom border-200">
+                  <td class="align-middle text-end fw-semi-bold">1.</td>
+                  <td class="align-middle text-end fw-semi-bold">을지병원</td>
+                  <td class="align-middle text-end fw-semi-bold">04/03</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    
+    <script>
+      //도넛
+      const labels = ["January", "February", "March", "April", "May", "June"];
+
+      const data = {
+        labels: labels,
+        datasets: [
+          {
+            label: "카테고리별 계약 건수",
+            backgroundColor: [
+              //색상
+              "rgba(255, 99, 132, 0.2)",
+              "rgba(54, 162, 235, 0.2)",
+              "rgba(255, 206, 86, 0.2)",
+              "rgba(75, 192, 192, 0.2)",
+              "rgba(153, 102, 255, 0.2)",
+              "rgba(255, 159, 64, 0.2)",
+            ],
+            borderColor: [
+              //경계선 색상
+              "rgba(255, 99, 132, 1)",
+              "rgba(54, 162, 235, 1)",
+              "rgba(255, 206, 86, 1)",
+              "rgba(75, 192, 192, 1)",
+              "rgba(153, 102, 255, 1)",
+              "rgba(255, 159, 64, 1)",
+            ],
+            data: [0, 10, 5, 2, 20, 30, 45],
+          },
+        ],
+      };
+
+      const config = {
+        type: "doughnut",
+        data: data,
+        options : {
+          responsive: true,
+          plugins:{
+          legend:{
+           
+            labels:{
+             
+              font:{
+                size:15
+              }
+            }
+          }
+        }
+        }  
+      };
+
+      const myChart = new Chart(document.getElementById("myChart"), config);
+
+
+      const data2 = {
+        labels: labels,
+        datasets: [
+          {
+            label: "카테고리별 계약 건수",
+            backgroundColor: [
+              //색상
+              "rgba(255, 99, 132, 0.2)",
+              "rgba(54, 162, 235, 0.2)",
+              "rgba(255, 206, 86, 0.2)",
+              "rgba(75, 192, 192, 0.2)",
+              "rgba(153, 102, 255, 0.2)",
+              "rgba(255, 159, 64, 0.2)",
+            ],
+            borderColor: [
+              //경계선 색상
+              "rgba(255, 99, 132, 1)",
+              "rgba(54, 162, 235, 1)",
+              "rgba(255, 206, 86, 1)",
+              "rgba(75, 192, 192, 1)",
+              "rgba(153, 102, 255, 1)",
+              "rgba(255, 159, 64, 1)",
+            ],
+            data: [0, 10, 5, 2, 20, 30, 45],
+          },
+        ],
+      };
+
+      const config2 = {
+        type: "doughnut",
+        data: data2,
+        options : {
+          responsive: true,
+          plugins:{
+          legend:{
+           
+            labels:{
+             
+              font:{
+                size:15
+              }
+            }
+          }
+        }
+        }  
+      };
+
+      const myChart2 = new Chart(document.getElementById("myChart2"), config2);
+
+      const data3 = {
+        labels: labels,
+        datasets: [
+          {
+            label: "월별 매출 추이",
+            backgroundColor: [
+              //색상
+              "rgba(255, 99, 132, 0.2)",
+            ],
+            borderColor: [
+              //경계선 색상
+              "rgba(255, 99, 132, 1)",
+            ],
+            data: [0, 10, 40, 70, 100, 30, 80],
+            fill: false,
+            tension: 0.1,
+          },
+          {
+            label: "월별 계약 추이",
+            
+            backgroundColor: [
+              //색상
+              "rgba(54, 162, 235, 0.2)",
+            ],
+            borderColor: [
+              //경계선 색상
+              "rgba(54, 200, 235, 0.6)",
+            ],
+            data: [100, 40, 2, 70, 20, 55, 80],
+            fill: false,
+            tension: 0.1,
+          }  
+        ],
+        
+      };
+      
+
+      const config3 = {
+        type: "line",
+        data: data3,
+        options : {
+          responsive: true,
+          plugins:{
+          legend:{
+           
+            labels:{
+             
+              font:{
+                size:15
+              }
+            }
+          }
+        }
+        }
+      
+      };
+     
+      const myChart3 = new Chart(document.getElementById("myChart3"), config3);
+      async function expand(){
+        let check=$("#categorybar").attr('aria-expanded');
+        console.log(check);
+        await
+        $("#sideMenu2").toggleClass("col-lg-3",check);
+        $("#sideMenu2").toggleClass("col-lg-5",check);
+        
+     
+
+      }
+     
+
+     
+
+      
+    </script>
+  </body>
+</html>
